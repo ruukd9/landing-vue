@@ -1,0 +1,16 @@
+services:
+
+  web:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - ${APP_PORT:-8080}:5173
+    volumes:
+      - ./:/usr/src/app
+    # networks:
+    #   - vue
+
+# networks:
+#   vue:
+#     driver: bridge
