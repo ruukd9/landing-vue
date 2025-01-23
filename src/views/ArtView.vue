@@ -9,7 +9,7 @@ import Artwork from '@/components/Artwork.vue'
   <div class="mt-20 mb-5 px-8 lg:px-10 flex flex-col justify-center items-center gap-10">
     <h1 class="text-4xl text-primary cursor-pointer" @click="togglePalette">artworks</h1>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col w-full">
       <!-- MAIN -->
       <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 py-5">
         <Artwork v-for="item in artworks.main" :thumb="item" />

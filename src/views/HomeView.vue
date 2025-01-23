@@ -3,14 +3,8 @@ import Propic from '@/components/Propic.vue'
 import Socials from '@/components/Socials.vue'
 
 import { togglePalette } from '@/lib/themeStore'
-import { propic } from '@/lib/propicStore'
 
 export default {
-  data(){
-    return {
-      ready: propic.path != null,
-    }
-  },
   methods: {
     togglePalette
   },
@@ -21,9 +15,9 @@ export default {
 </script>
 
 <template>
-  <div class="flex-col flex md:flex-row gap-8">
+  <div class="flex flex-col justify-center md:flex-row px-8 gap-8">
     <div class="flex justify-center cursor-pointer" @click="togglePalette">
-      <Propic @imgload="ready=true"/>
+      <Propic />
     </div>
 
     <div class="flex flex-col gap-4 justify-between">

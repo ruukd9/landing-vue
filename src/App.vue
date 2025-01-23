@@ -95,16 +95,20 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen flex flex-col bg-background">
+    <!-- navbar -->
     <div v-show="$route.name!='home'">
       <Navbar />
     </div>
 
+    <!-- main -->
     <div class="min-h-screen flex flex-col justify-center items-center p-2">
-      <div class="relative flex justify-center items-center h-3 w-3" v-show="!isPageReady" v-cloak>
+      <!-- loading -->
+      <div class="flex justify-center items-center h-3 w-3" v-show="!isPageReady" v-cloak>
         <span class="animate-ping h-full w-full rounded-full bg-on-background opacity-75"></span>
       </div>
 
-      <div v-show="isPageReady" v-cloak>
+      <!-- content -->
+      <div v-show="isPageReady" v-cloak class="w-full">
         <RouterView />
       </div>
     </div>

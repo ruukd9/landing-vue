@@ -16,7 +16,9 @@
 </script>
 
 <template>
-  <img :src="`${cdnurl}/${thumb}`" @click="open=true" class="w-100 h-100 rounded-xl aspect-square object-cover object-center cursor-pointer dark:brightness-[.8] dark:contrast-[1.2]"/>
+  <div class="flex flex-col aspect-square pb-[100%]">
+    <img v-lazyload :data-url="`${cdnurl}/${thumb}`" @click="open=true" class="w-full h-full opacity-0 transition-all rounded-xl object-cover object-center cursor-pointer dark:brightness-[.8] dark:contrast-[1.2]"/>
+  </div>
 
   <div v-if="open" class="flex flex-col gap-2 items-center justify-center fixed top-0 left-0 h-screen w-screen bg-black/70 z-10 backdrop-blur-sm" @click="open=false">
     <img :src="`${cdnurl}/${thumb}`" class="max-w-[80%] rounded-3xl sm:max-h-[80%] dark:brightness-[.8] dark:contrast-[1.2]" />

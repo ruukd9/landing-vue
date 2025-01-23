@@ -11,8 +11,8 @@ body {
 }
 
 @theme {
-  --color-primary:        rgb(var(--primary)),
-  --color-background:     rgb(var(--background)),
-  --color-on-background:  rgb(var(--on-background)),
-  --color-on-primary:     rgb(var(--on-primary))
+  --color-primary:        rgba(var(--primary)),
+  --color-background:     rgba(var(--background)),
+  --color-on-background:  rgba(var(--on-background)),
+  --color-on-primary:     rgba(var(--on-primary))
 }

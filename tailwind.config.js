@@ -8,10 +8,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary":        "rgb(var(--primary))",
-        "background":     "rgb(var(--background))",
-        "on-background":  "rgb(var(--on-background))",
-        "on-primary":     "rgb(var(--on-primary))"
+        "primary":        "rgba(var(--primary))",
+        "background":     "rgba(var(--background))",
+        "on-background":  "rgba(var(--on-background))",
+        "on-primary":     "rgba(var(--on-primary))"
       }
     },
   },
