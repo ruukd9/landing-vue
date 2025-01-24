@@ -41,6 +41,8 @@ async function loadAndSetScheme() {
   img.setAttribute('src', propic.path)
   img.setAttribute('crossorigin', 'anonymous')
 
+  document.querySelector('link[id="favicon"]').setAttribute("href", propic.path)
+
   const sourceColor = await sourceColorFromImage(img)
   // const mainHct = Hct.fromInt(sourceColor)
   const m3theme = themeFromSourceColor(sourceColor)
@@ -108,9 +110,24 @@ onMounted(async () => {
       </div>
 
       <!-- content -->
-      <div v-show="isPageReady" v-cloak class="w-full">
-        <RouterView />
-      </div>
+      <Transition name="fade">
+        <div v-show="isPageReady" v-cloak class="w-full">
+          <RouterView />
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
+
+<style>
+  /* https://vuejs.org/guide/built-ins/transition.html#named-transitions */
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 1s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+</style>
