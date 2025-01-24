@@ -98,12 +98,12 @@ onMounted(async () => {
 <template>
   <div class="min-h-screen flex flex-col bg-background">
     <!-- navbar -->
-    <div v-show="$route.name!='home'">
+    <div v-show="isPageReady && $route.name!='home'" v-cloak>
       <Navbar />
     </div>
 
     <!-- main -->
-    <div class="min-h-screen flex flex-col justify-center items-center p-2">
+    <div class="flex flex-col flex-1 justify-center items-center p-2">
       <!-- loading -->
       <div class="flex justify-center items-center h-3 w-3" v-show="!isPageReady" v-cloak>
         <span class="animate-ping h-full w-full rounded-full bg-on-background opacity-75"></span>
