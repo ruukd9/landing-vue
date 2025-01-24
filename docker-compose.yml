@@ -5,7 +5,8 @@ services:
     env_file:
       - .env
     ports:
-      - ${APP_PORT:-8080}:5173
+      - ${DEV_PORT:-8080}:5173
+      - ${BUILD_PORT:-8081}:4173 # build preview
     volumes:
       - ./:/usr/src/app
     # networks:
