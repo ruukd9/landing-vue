@@ -5,69 +5,9 @@ import Navbar from '@/components/Navbar.vue';
 import { onMounted, watch, ref } from 'vue'
 import { propic, getPropicUrl } from '@/lib/propicStore'
 import { theme } from '@/lib/themeStore';
+import { setPalette, getPaletteScheme } from '@/lib/m3system'
 
 const isPageReady = ref(false)
-
-/* PALETTE HANDLING */
-import {
-  hexFromArgb,
-  themeFromSourceColor,
-  sourceColorFromImage
-} from '@material/material-color-utilities';
-
-function hexToRgb(hex) {
-  if(hex[0]=='#'){ hex = hex.substring(1) }
-  var comps = hex.match(/.{1,2}/g)
-  return `${parseInt(comps[0], 16)}, ${parseInt(comps[1], 16)}, ${parseInt(comps[2], 16)}`
-}
-
-function setPalette() {
-  const colors = theme.schemes[theme.mode]
-  if(!colors){ return }
-
-  document.documentElement.style.setProperty('--background', hexToRgb(colors.background))
-  document.documentElement.style.setProperty('--primary', hexToRgb(colors.primary))
-  document.documentElement.style.setProperty('--on-background', hexToRgb(colors.onBackground))
-  document.documentElement.style.setProperty('--on-primary', hexToRgb(colors.onPrimary))
-  document.querySelector('meta[name="theme-color"]').setAttribute("content", hexToRgb(colors.background))
-
-  document.documentElement.dataset.theme = theme.mode
-
-  isPageReady.value = true
-}
-
-async function loadAndSetScheme() {
-  const img = document.createElement("img")
-  img.setAttribute('src', propic.path)
-  img.setAttribute('crossorigin', 'anonymous')
-
-  document.querySelector('link[id="favicon"]').setAttribute("href", propic.path)
-
-  const sourceColor = await sourceColorFromImage(img)
-  // const mainHct = Hct.fromInt(sourceColor)
-  const m3theme = themeFromSourceColor(sourceColor)
-
-  const dark = m3theme.schemes.dark
-  const light = m3theme.schemes.light
-
-  const palette = {
-    dark: {
-      primary: hexFromArgb(dark.primary),
-      background: hexFromArgb(dark.background),
-      onPrimary: hexFromArgb(dark.onPrimary),
-      onBackground: hexFromArgb(dark.onBackground)
-    },
-    light: {
-      primary: hexFromArgb(light.primary),
-      background: hexFromArgb(light.background),
-      onPrimary: hexFromArgb(light.onPrimary),
-      onBackground: hexFromArgb(light.onBackground)
-    }
-  }
-
-  theme.schemes = palette
-  setPalette()
-}
 
 onMounted(async () => {
   // https://vuejs.org/guide/essentials/watchers.html#watch-source-types
@@ -81,7 +21,11 @@ onMounted(async () => {
 
   if(!propic.path){
     await getPropicUrl()
-    loadAndSetScheme()
+    theme.schemes = await getPaletteScheme()
+
+    setPalette()
+
+    isPageReady.value = true
   }
 });
 </script>
