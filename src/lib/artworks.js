@@ -1,5 +1,6 @@
 export const artworks = {
   main: [
+    "main/inasnake.jpg",
     "main/inainaswim.jpg",
     "main/inafang.jpg",
     "main/inainabunni.jpg",
